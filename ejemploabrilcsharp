@@ -1,0 +1,395 @@
+public void SubAgregarPuestoBinario()
+{
+
+    string lStrInformacion = string.Empty;
+    String lstrCadena = string.Empty;
+    int lintIdPuesto = 0;
+    Boolean lblnContinuaIngresando = true;
+    String lStrDeseaContinuar = string.Empty;
+    string lStrNombre = string.Empty;
+    double lDblSueldo = 0;
+    BinaryReader lObjLeer;
+    BinaryWriter lObjEscribir;
+    Console.Clear(); //Limpiar la pantalla                       
+    try
+    {
+
+        if (File.Exists("c:/pmo/puestosB.txt"))
+        {
+            FileStream fs = new FileStream("c:/pmo/puestosB.txt", FileMode.Open, FileAccess.Read);
+            lObjLeer = new BinaryReader(fs);
+            while (fs.Position != fs.Length)
+            {
+                lintIdPuesto = lObjLeer.ReadInt32();
+                lObjLeer.ReadString();
+                lObjLeer.ReadDouble();
+            }
+            lintIdPuesto += 1;
+            lObjLeer.Close();
+        }
+        else
+        {
+            lintIdPuesto = 1;
+        }
+        if (lintIdPuesto != 0)
+        {
+            using (FileStream sw = new FileStream("c:/pmo/puestosB.txt", FileMode.Append))
+            {
+                while (lblnContinuaIngresando == true)
+                {
+
+                    Console.Clear(); //Limpiar la pantalla
+                    Console.SetCursorPosition(0, 3);
+                    string StrTitulo = "INFORMACION A COMPLETAR DEL PUESTOS";
+                    Console.SetCursorPosition((Console.WindowWidth - StrTitulo.Length) / 2, Console.CursorTop); //Centrar cursor para desplegar el titulo.
+                    Console.WriteLine(StrTitulo);
+
+
+                    Console.SetCursorPosition(25, 5); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 85)));
+                    Console.SetCursorPosition(35, 6); Console.WriteLine("DATOS GENERALES ");
+                    Console.SetCursorPosition(25, 7); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 85)));
+                    Console.SetCursorPosition(35, 8); Console.WriteLine("ID PUESTO       :            [                                          ]");
+                    Console.SetCursorPosition(35, 9); Console.WriteLine("NOMBRE PUESTO   :            [                                          ]");
+                    Console.SetCursorPosition(25, 12); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 85)));
+                    Console.SetCursorPosition(35, 13); Console.WriteLine("DATOS ESPECIFICOS");
+                    Console.SetCursorPosition(25, 14); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 85)));
+                    Console.SetCursorPosition(35, 15); Console.WriteLine("SALARIO        :        [                                          ]");
+                    Console.SetCursorPosition(25, 17); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 85)));
+                    Console.SetCursorPosition(70, 8); Console.WriteLine(Convert.ToString(lintIdPuesto).PadLeft(4, '0'));
+                    Console.SetCursorPosition(70, 9); lStrNombre = Console.ReadLine();
+                    Console.SetCursorPosition(70, 15); lDblSueldo = double.Parse(Console.ReadLine());
+
+                    Console.SetCursorPosition(40, 18); Console.WriteLine("DESEA CONTINUAR INGRESANDO REGISTROS S/N:        [  ]");
+                    Console.SetCursorPosition(90, 18); lStrDeseaContinuar = Console.ReadLine();
+
+                    lObjEscribir = new BinaryWriter(sw);
+                    lObjEscribir.Write(lintIdPuesto);
+                    lObjEscribir.Write(lStrNombre);
+                    lObjEscribir.Write(lDblSueldo);
+                    if (lStrDeseaContinuar.ToUpper() == "N")
+                    {
+                        lblnContinuaIngresando = false;
+                        lObjEscribir.Close();
+                    }
+                    lintIdPuesto += 1;
+                }
+                Console.Write("            Presione una tecla para continuar...");
+            }
+        }
+
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("ERROR EN INTERACCION CON ARCHIVO: " + e.Message);
+    }
+    finally
+    {
+
+    }
+
+
+}
+
+public void SubAgregarEmpleadoBinario()
+{
+
+    string lStrInformacion = string.Empty;
+    String lstrCadena = string.Empty;
+    int lintIdEmpleado = 0;
+    int lintIdPuesto = 0;
+    Boolean lblnContinuaIngresando = true;
+    String lStrDeseaContinuar = string.Empty;
+    string lStrNombre = string.Empty;
+    string lStrDireccion = string.Empty;
+    string lStrTelefono = string.Empty;
+    BinaryWriter lObjEscribir;
+    BinaryReader lObjLeer;
+    Console.Clear(); //Limpiar la pantalla                       
+    try
+    {
+
+        if (File.Exists("c:/pmo/Bempleado.txt"))
+        {
+            FileStream fs = new FileStream("c:/pmo/Bempleado.txt", FileMode.Open, FileAccess.Read);
+            lObjLeer = new BinaryReader(fs);
+            while (fs.Position != fs.Length)
+            {
+                lintIdEmpleado = lObjLeer.ReadInt32();
+                lObjLeer.ReadString();
+                lObjLeer.ReadString();
+                lObjLeer.ReadString();
+                lObjLeer.ReadInt32();
+            }
+            lintIdEmpleado += 1;
+            lObjLeer.Close();
+        }
+        else
+        {
+            lintIdEmpleado = 1;
+        }
+        if (lintIdEmpleado != 0)
+        {
+            using (FileStream sw = new FileStream("c:/pmo/Bempleado.txt", FileMode.Append))
+            {
+                while (lblnContinuaIngresando == true)
+                {
+
+                    Console.Clear(); //Limpiar la pantalla
+                    Console.SetCursorPosition(0, 3);
+                    string StrTitulo = "INFORMACION A COMPLETAR DEL EMPLEADO";
+                    Console.SetCursorPosition((Console.WindowWidth - StrTitulo.Length) / 2, Console.CursorTop); //Centrar cursor para desplegar el titulo.
+                    Console.WriteLine(StrTitulo);
+
+
+                    Console.SetCursorPosition(25, 5); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 85)));
+                    Console.SetCursorPosition(35, 6); Console.WriteLine("DATOS GENERALES ");
+                    Console.SetCursorPosition(25, 7); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 85)));
+                    Console.SetCursorPosition(35, 8); Console.WriteLine("ID EMPLEADO     :            [                                          ]");
+                    Console.SetCursorPosition(35, 9); Console.WriteLine("NOMBRE EMPLEADO :            [                                          ]");
+                    Console.SetCursorPosition(35, 10); Console.WriteLine("DIRECCION      :            [                                          ]");
+                    Console.SetCursorPosition(35, 11); Console.WriteLine("TELEFONO       :            [                                          ]");
+                    Console.SetCursorPosition(25, 12); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 85)));
+                    Console.SetCursorPosition(35, 13); Console.WriteLine("DATOS ESPECIFICOS");
+                    Console.SetCursorPosition(25, 14); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 85)));
+                    Console.SetCursorPosition(35, 15); Console.WriteLine("ID PUESTO      :        [                                          ]");
+                    Console.SetCursorPosition(25, 17); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 85)));
+                    Console.SetCursorPosition(70, 8); Console.WriteLine(Convert.ToString(lintIdEmpleado).PadLeft(4, '0'));
+                    Console.SetCursorPosition(70, 9); lStrNombre = Console.ReadLine();
+                    Console.SetCursorPosition(70, 10); lStrDireccion = Console.ReadLine();
+                    Console.SetCursorPosition(70, 11); lStrTelefono = Console.ReadLine();
+                    Console.SetCursorPosition(70, 15); lintIdPuesto = int.Parse(Console.ReadLine());
+                    bool blnValidar = false;
+                    blnValidar = FncValidaPuestoBinario(lintIdPuesto);
+                    while (blnValidar == false)
+                    {
+                        Console.SetCursorPosition(35, 22); Console.WriteLine("EL ID NO EXISTE.");
+                        Console.SetCursorPosition(70, 15); Console.WriteLine("         ");
+                        Console.SetCursorPosition(70, 15); lintIdPuesto = int.Parse(Console.ReadLine());
+                        blnValidar = FncValidaPuesto(lintIdPuesto);
+                    }
+                    lObjEscribir = new BinaryWriter(sw);
+                    lObjEscribir.Write(lintIdEmpleado);
+                    lObjEscribir.Write(lStrNombre);
+                    lObjEscribir.Write(lStrDireccion);
+                    lObjEscribir.Write(lStrTelefono);
+                    lObjEscribir.Write(lintIdPuesto);
+
+                    lintIdEmpleado += 1;
+                    Console.SetCursorPosition(40, 18); Console.WriteLine("DESEA CONTINUAR INGRESANDO REGISTROS S/N:        [  ]");
+                    Console.SetCursorPosition(90, 18); lStrDeseaContinuar = Console.ReadLine();
+
+                    if (lStrDeseaContinuar.ToUpper() == "N")
+                    {
+                        lblnContinuaIngresando = false;
+                        lObjEscribir.Close();
+                    }
+
+                }
+                Console.Write("            Presione una tecla para continuar...");
+            }
+        }
+
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("ERROR EN INTERACCION CON ARCHIVO: " + e.Message);
+    }
+    finally
+    {
+
+    }
+
+
+}
+
+public static bool FncValidaPuestoBinario(int pIntPuesto)
+{
+    bool lBlnResultado = false;
+    String lstrCadena = string.Empty;
+    int lintPuestoRevision = 0;
+    BinaryReader lObjleer;
+    if (File.Exists("c:/pmo/puestosB.txt"))
+    {
+        FileStream fs = new FileStream("c:/pmo/puestosB.txt", FileMode.Open, FileAccess.Read);
+        lObjleer = new BinaryReader(fs);
+        bool lBlnSeguir = false;
+        while (fs.Position != fs.Length && (lBlnSeguir == false))
+        {
+            lintPuestoRevision = lObjleer.ReadInt32();
+            lObjleer.ReadString();
+            lObjleer.ReadDouble();
+            if (lintPuestoRevision == pIntPuesto)
+            {
+                lBlnResultado = true;
+                lBlnSeguir = true;
+            }
+        }
+    }
+    else
+    {
+        lBlnResultado = false;
+    }
+
+    return lBlnResultado;
+}
+
+static List<PuestoTrabajo> FncObtienePuestoBinario()
+{
+    string lstrCadena = string.Empty;
+    var lObjResultado = new List<PuestoTrabajo>();
+    PuestoTrabajo LobjPuesto;
+    BinaryReader lobjLeer;
+    if (File.Exists("c:/pmo/puestosB.txt"))
+    {
+        FileStream fs = new FileStream("c:/pmo/puestosB.txt", FileMode.Open, FileAccess.Read);
+        lobjLeer = new BinaryReader(fs);
+        while (fs.Position != fs.Length)
+        {
+            LobjPuesto.lIntPuesto = lobjLeer.ReadInt32();
+            LobjPuesto.lStrNombrePuesto = lobjLeer.ReadString();
+            LobjPuesto.lDblSueldo = lobjLeer.ReadDouble();
+            lObjResultado.Add(LobjPuesto);
+        }
+        lobjLeer.Close();
+    }
+    return lObjResultado;
+
+}
+
+public void SubLIstarInformacionArchivoBinario()
+{
+    Console.Clear();
+    BinaryReader lobjLeer;
+    try
+    {
+        using (FileStream fs = new FileStream("c:/pmo/Bempleado.txt", FileMode.Open, FileAccess.Read))
+        {
+            Console.WriteLine("        ________________________________________________________________");
+            string lstrCadena;
+            int lIntLinea = 9;
+            Console.SetCursorPosition(0, 3);
+            string StrTitulo = "PLANILLA LABORAL";
+            Console.SetCursorPosition((Console.WindowWidth - StrTitulo.Length) / 2, Console.CursorTop); //Centrar cursor para desplegar el titulo.
+            Console.WriteLine(StrTitulo);
+            Console.SetCursorPosition(5, 5); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 110)));
+            StrTitulo = "DETALLE DE INFORMACION";
+            Console.SetCursorPosition((Console.WindowWidth - StrTitulo.Length) / 2, Console.CursorTop); //Centrar cursor para desplegar el titulo.
+            Console.WriteLine(StrTitulo);
+            Console.SetCursorPosition(5, 5); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 110)));
+            ///Cuota Patronal es el Sueldo * 4.83% y el Sueldo Liquido es Sueldo - Cuota Patronal
+            Console.SetCursorPosition(5, 8); Console.WriteLine("NOMBRE EMPLEADO                NOMBRE PUESTO       SUELDO       CUOTA PATRONAL   SUELDO LIQUIDO");
+            List<PuestoTrabajo> lobjPuestos = FncObtienePuestoBinario();
+            lobjLeer = new BinaryReader(fs);
+            while (fs.Position != fs.Length)
+            {
+                String lStrPuesto = string.Empty;
+                double lDblCuotaPatronal = 0.00;
+                double lDblSalarioLiquido = 0.00;
+                lobjLeer.ReadInt32();
+                Console.SetCursorPosition(5, lIntLinea); Console.Write(lobjLeer.ReadString());
+                lobjLeer.ReadString();
+                lobjLeer.ReadString();
+                int lIntPuestoTemp = 0;
+                lIntPuestoTemp = lobjLeer.ReadInt32();
+                foreach (PuestoTrabajo lObjPuesto in lobjPuestos)
+                {
+                    if (lObjPuesto.lIntPuesto == lIntPuestoTemp)
+                    {
+                        Console.SetCursorPosition(37, lIntLinea); Console.Write(lObjPuesto.lStrNombrePuesto);
+                        Console.SetCursorPosition(57, lIntLinea); Console.Write(lObjPuesto.lDblSueldo.ToString("N2"));
+                        lDblCuotaPatronal = lObjPuesto.lDblSueldo * 0.0483;
+                        lDblSalarioLiquido = lObjPuesto.lDblSueldo - lDblCuotaPatronal;
+                        Console.SetCursorPosition(70, lIntLinea); Console.Write(lDblCuotaPatronal.ToString("N2"));
+                        Console.SetCursorPosition(90, lIntLinea); Console.Write(lDblSalarioLiquido.ToString("N2"));
+                        lIntLinea += 1;
+                        break;
+                    }
+                }
+            }
+            Console.SetCursorPosition(5, lIntLinea); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 110)));
+        }
+        Console.SetCursorPosition(30, 30); Console.Write("            Presione una tecla para continuar...");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("        ________________________________________________________________");
+        Console.WriteLine("            OCURRIO UN ERROR AL LEER EL ARCHIVO, FAVOR REVISE");
+        Console.WriteLine("   " + ex.Message);
+        Console.WriteLine("        ________________________________________________________________");
+
+    }
+    finally
+    {
+
+    }
+}
+
+public void SubProcesoAumentoSalarioBinario()
+{
+    Console.Clear();
+    BinaryWriter lObjEscribir;
+    BinaryReader lobjLeer;
+    try
+    {
+        using (FileStream fs = new FileStream("c:/pmo/puestosB.txt", FileMode.Open, FileAccess.Read))
+        {
+            FileStream sw = new FileStream("c:/pmo/Btemp.txt", FileMode.Append);
+            Console.WriteLine("        ________________________________________________________________");
+            String lstrCadena;
+            int lIntLinea = 9;
+            Console.Clear(); //Limpiar la pantalla
+            Console.SetCursorPosition(0, 3);
+            string StrTitulo = "PLANILLA LABORAL";
+            Console.SetCursorPosition((Console.WindowWidth - StrTitulo.Length) / 2, Console.CursorTop); //Centrar cursor para desplegar el titulo.
+            Console.WriteLine(StrTitulo);
+            Console.SetCursorPosition(5, 5); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 110)));
+            StrTitulo = "AUMENTO SALARIO";
+            Console.SetCursorPosition((Console.WindowWidth - StrTitulo.Length) / 2, Console.CursorTop); //Centrar cursor para desplegar el titulo.
+            Console.Write(StrTitulo);
+            Console.SetCursorPosition(5, 7); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 110)));
+            Console.SetCursorPosition(5, 8); Console.WriteLine(" ID        NOMBRE PUESTO       SUELDO ACTUAL    AUMENTO   SALARIO NUEVO");
+
+            lobjLeer = new BinaryReader(fs);
+            lObjEscribir = new BinaryWriter(sw);
+            int lintPuesto = 0;
+            string lStrNombrePUesto = "";
+            Double lDblSalarioActual = 0;
+            while (fs.Position != fs.Length)
+            {
+                double lDblAumento;
+                double lDblSalarioNuevo;
+                lintPuesto = lobjLeer.ReadInt32();
+                lStrNombrePUesto = lobjLeer.ReadString();
+                lDblSalarioActual = lobjLeer.ReadDouble();
+                Console.SetCursorPosition(5, lIntLinea); Console.Write(lintPuesto);
+                Console.SetCursorPosition(15, lIntLinea); Console.Write(lStrNombrePUesto);
+                lDblAumento = lDblSalarioActual * 0.05;
+                lDblSalarioNuevo = lDblSalarioActual + lDblAumento;
+                Console.SetCursorPosition(38, lIntLinea); Console.Write(lDblSalarioActual.ToString("N2"));
+                Console.SetCursorPosition(56, lIntLinea); Console.Write(lDblAumento.ToString("N2"));
+                Console.SetCursorPosition(67, lIntLinea); Console.Write(lDblSalarioNuevo.ToString("N2"));
+                lObjEscribir.Write(lintPuesto);
+                lObjEscribir.Write(lStrNombrePUesto);
+                lObjEscribir.Write(lDblSalarioNuevo);
+                lIntLinea += 1;
+            }
+            lobjLeer.Close();
+            lObjEscribir.Close();
+            File.Delete("c:/pmo/puestosB.txt");
+            File.Move("c:/pmo/Btemp.txt", "c:/pmo/puestosB.txt");
+            Console.SetCursorPosition(5, lIntLinea); Console.WriteLine(string.Concat(Enumerable.Repeat("=", 110)));
+        }
+        Console.SetCursorPosition(30, 30); Console.Write("            Presione una tecla para continuar...");
+    }
+    catch (IOException e)
+    {
+        Console.WriteLine("        ________________________________________________________________");
+        Console.WriteLine("            OCURRIO UN ERROR AL LEER EL ARCHIVO, FAVOR REVISE");
+        Console.WriteLine("   " + e.Message);
+        Console.WriteLine("        ________________________________________________________________");
+    }
+    finally
+    {
+
+    }
+}
